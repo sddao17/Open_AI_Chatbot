@@ -1,7 +1,4 @@
 
-import bot from "./assets/bot.svg";
-import user from "./assets/user.svg";
-
 const form = document.querySelector("form");
 const chatContainer = document.querySelector("#chat-container");
 
@@ -30,7 +27,7 @@ function typeText(element, text) {
 		} else {
 			clearInterval(interval);
 		}
-	}, 20);
+	}, 10);
 }
 
 function generateUniqueId() {
@@ -47,8 +44,7 @@ function chatStripe(isAi, value, uniqueId) {
 			<div class="wrapper ${isAi && 'ai'}">
 				<div class="chat">
         	<div class="profile">
-          	<img src=${isAi ? bot : user} 
-                 alt="${isAi ? 'bot' : 'user'}"/>
+        		<i class="img ${isAi ? "fas fa-robot" : "fas fa-user"}"></i>
           </div>
           <div class="message" id=${uniqueId}>${value}</div>
         </div>
@@ -59,6 +55,10 @@ function chatStripe(isAi, value, uniqueId) {
 
 const handleSubmit = async (event) => {
 	event.preventDefault();
+
+	// Reset the size of the textarea after text submission
+	const textarea = document.querySelector("textarea");
+	textarea.style.height = "42px";
 
 	const data = new FormData(form);
 
@@ -75,7 +75,7 @@ const handleSubmit = async (event) => {
 	loader(messageDiv);
 
 	// Fetch data form the server and get the bot's response
-	const response = await fetch("http://localhost:5002", {
+	const response = await fetch("https://server-dot-openai-chat-gpt-chatbot.uw.r.appspot.com", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json"
@@ -95,16 +95,15 @@ const handleSubmit = async (event) => {
 		typeText(messageDiv, parsedData);
 	} else {
 		const err = await response.text();
+		console.log(err);
 
 		messageDiv.innerHTML = "Something went wrong; please try again later.";
-
-		alert(err);
 	}
 }
 
 form.addEventListener("submit", handleSubmit);
-form.addEventListener("keyup", (event) => {
-	if (event.keyCode === 13) {
+form.addEventListener("keydown", (event) => {
+	if (event.keyCode === 13 && event.shiftKey === false) {
 		handleSubmit(event).then();
 	}
 });

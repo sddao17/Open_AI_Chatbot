@@ -4,16 +4,24 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CodeX - Your Coding AI</title>
+  <title>Codex - Your Chatbot AI</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@300&display=swap">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" >
 </head>
 <body>
 <div id="app">
   <div id="chat-container"></div>
-
   <form>
-    <textarea name="prompt" rows="1" cols="1" placeholder="Ask codex..."></textarea>
-    <button type="submit"><img src="assets/send.svg" alt="send" /></button>
+    <label>
+      <textarea autofocus
+                name="prompt"
+                rows="1"
+                cols="1"
+                placeholder="Ask Codex ..."
+                oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
+    </label>
+    <button type="submit"><i class="fas fa-paper-plane"></i></button>
   </form>
 </div>
 

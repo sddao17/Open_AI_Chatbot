@@ -13,6 +13,13 @@ const configuration = new Configuration({
 const openAi = new OpenAIApi(configuration);
 
 const app = express();
+app.use(function(req, res, next) {
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+	res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+	res.setHeader('Access-Control-Allow-Credentials', true);
+	next();
+});
 app.use(cors());
 app.use(express.json());
 
@@ -30,7 +37,7 @@ app.post("/", async (request, result) => {
 			model: "text-davinci-003",
 			prompt: `${prompt}`,
 			temperature: 0,
-			max_tokens: 300,
+			max_tokens: 2048,
 			top_p: 1,
 			frequency_penalty: 0.5,
 			presence_penalty: 0
@@ -45,4 +52,4 @@ app.post("/", async (request, result) => {
 	}
 });
 
-app.listen(5002, () => console.log("Server is running on port http://localhost:5002"));
+app.listen(8080, () => console.log("Server is running on port http://localhost:8080"));
