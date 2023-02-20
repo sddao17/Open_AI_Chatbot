@@ -4,6 +4,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Alegreya Sans", sans-serif;
+  transition: 0.2s all ease-in-out;
 }
 
 body {
@@ -147,7 +148,6 @@ textarea {
   border: none;
   outline: none;
   resize: none;
-  transition: 0.2s height ease-in-out;
 }
 
 button {
@@ -158,7 +158,6 @@ button {
   color: rgba(0, 255, 255, 1);
   font-size: 20px;
   margin-right: 20px;
-  transition: 0.2s transform ease-in-out;
 }
 
 button:hover {

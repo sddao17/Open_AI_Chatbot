@@ -69,7 +69,6 @@ const handleSubmit = async (event) => {
 	// Bot's chat stripe
 	const uniqueId = generateUniqueId();
 	chatContainer.innerHTML += chatStripe(true, " ", uniqueId);
-	chatContainer.scrollTop = chatContainer.scrollHeight;
 
 	const messageDiv = document.getElementById(uniqueId);
 	loader(messageDiv);
@@ -99,6 +98,16 @@ const handleSubmit = async (event) => {
 
 		messageDiv.innerHTML = "Something went wrong; please try again later.";
 	}
+
+	// Create an Observer instance to track changes to chat container's scroll height
+	const resizeObserver = new ResizeObserver(entries => {
+				console.log(entries[0].target.scrollHeight)
+				chatContainer.scrollTop = entries[0].target.scrollHeight + chatContainer.scrollHeight
+			}
+	)
+
+// Start observing the chat container
+	resizeObserver.observe(messageDiv);
 }
 
 form.addEventListener("submit", handleSubmit);
