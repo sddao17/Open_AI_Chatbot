@@ -101,7 +101,6 @@ const handleSubmit = async (event) => {
 
 	// Create an Observer instance to track changes to chat container's scroll height
 	const resizeObserver = new ResizeObserver(entries => {
-				console.log(entries[0].target.scrollHeight)
 				chatContainer.scrollTop = entries[0].target.scrollHeight + chatContainer.scrollHeight
 			}
 	)
